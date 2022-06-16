@@ -3,16 +3,34 @@ import axios from "axios";
 export const auth = {
   state: () => ({
     user: null,
+    errors: []
   }),
 
   actions: {
-    async LogIn({commit}, User) {
-      await axios.post('login', User)
-      await commit('setUser', User.get('username'))
+    LogIn({commit}, user) {
+      return new Promise((resolve, reject) => {
+        axios.post('/auth/login', user)
+          .then(resp => {
+            console.log('logged in successfully', resp);
+            commit('setUser', user.get('username'))
+            resolve(resp)
+          }).catch(err => {
+          if (err.response) {
+            commit('setErrors', err.response.data.errors)
+          } else {
+            commit('setErrors', {'message': 'An unknown error occurred'})
+          }
+          reject(err)
+        })
+      })
+    },
+
+    clearErrors({commit}) {
+      commit('setErrors', [])
     },
 
     async LogOut({commit}){
-      let user = null
+      let user = 'test'
       commit('logout', user)
     }
   },
@@ -24,10 +42,14 @@ export const auth = {
     LogOut(state){
       state.user = null
     },
+    setErrors(state, errors){
+      state.errors = errors
+    }
   },
 
   getters: {
     isAuthenticated: state => !!state.user,
     loggedInUser: state => state.user,
+    errors: state => state.errors
   }
 }
