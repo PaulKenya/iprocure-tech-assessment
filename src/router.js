@@ -2,6 +2,7 @@ import { createWebHistory, createRouter } from 'vue-router';
 import LoginPage from "./Views/LoginPage";
 import AllCountries from "./Views/Country/AllCountries";
 import CreateCountry from "./Views/Country/CreateCountry";
+import RegisterPage from "./Views/RegisterPage";
 import store from './store';
 
 const routes = [
@@ -9,6 +10,12 @@ const routes = [
     path: '/login',
     name: 'LoginPage',
     component: LoginPage,
+    meta: { guest: true },
+  },
+  {
+    path: '/register',
+    name: 'RegisterPage',
+    component: RegisterPage,
     meta: { guest: true },
   },
   {
