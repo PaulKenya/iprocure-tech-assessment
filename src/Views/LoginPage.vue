@@ -68,7 +68,15 @@ export default {
         'clientType': this.clientType
         // eslint-disable-next-line no-unused-vars
       }).then(resp => {
-        this.$swal('Hello Vue world!!!');
+        this.$router.push('/');
+
+        this.$swal.fire({
+          icon: 'success',
+          title: 'Successful Login',
+          showConfirmButton: false,
+          timer: 1500
+        })
+
         // eslint-disable-next-line no-unused-vars
       }).catch(err => {
       })
