@@ -90,8 +90,16 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
-  name: "AllCountries"
+  name: "AllCountries",
+  computed: {
+    ...mapGetters([
+       'isAuthenticated',
+       'loggedInUser'
+    ]),
+  }
 }
 </script>
 

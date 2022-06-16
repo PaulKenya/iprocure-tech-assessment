@@ -1,24 +1,10 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-Vue.use(Vuex);
+import { createStore } from 'vuex'
+import { auth } from "./modules/auth";
 
-export default new Vuex.Store({
-  state: {
-    layout: 'inside-dashboard'
-  },
-  mutations: {
-    SET_LAYOUT (state, payload){
-      state.layout = payload
-    }
-  },
-  actions: {
-  },
-  getters:{
-    layout (state){
-      return state.layout
-    }
-  },
+const store = createStore({
   modules: {
-    auth,
+    auth
   }
-})
+});
+
+export default store;
