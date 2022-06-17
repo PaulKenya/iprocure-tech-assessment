@@ -26,9 +26,13 @@ const routes = [
     children: [
       {
         path: '/create',
-        name: 'CreateCountry',
+        name: 'CountryForm',
         component: CreateCountry,
         meta: {requiresAuth: true},
+        props: (x) => ({
+          action: x.params.action,
+          verb: x.params.verb
+        })
       },
     ]
   }
