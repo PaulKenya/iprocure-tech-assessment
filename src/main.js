@@ -4,7 +4,6 @@ import './index.css'
 import router from './router';
 import store from './store';
 import axios from "axios";
-
 import 'flowbite';
 import './assets/tailwind.css'
 import VueSweetalert2 from 'vue-sweetalert2';
@@ -19,3 +18,4 @@ createApp(App)
   .use(store)
   .use(VueSweetalert2)
   .mount('#app')
+

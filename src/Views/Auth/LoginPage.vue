@@ -16,17 +16,6 @@
                   block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                  required="">
         </div>
-<!--        <div class="flex items-start">-->
-<!--          <div class="flex items-start">-->
-<!--            <div class="flex items-center h-5">-->
-<!--              <input id="remember" type="checkbox" value=""-->
-<!--                     class="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600-->
-<!--                      dark:focus:ring-blue-600 dark:ring-offset-gray-800">-->
-<!--            </div>-->
-<!--            <label for="remember" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember me</label>-->
-<!--          </div>-->
-<!--          <a href="#" class="ml-auto text-sm text-blue-700 hover:underline dark:text-blue-500">Lost Password?</a>-->
-<!--        </div>-->
         <ErrorToaster v-if="errors.length"/>
         <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
           <LoaderSVG v-if="loading" class="inline w-7 h-7"/>
@@ -47,8 +36,9 @@
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-import ErrorToaster from "../components/ErrorToaster";
-import LoaderSVG from "../components/LoaderSVG";
+import ErrorToaster from "../../components/ErrorToaster";
+import LoaderSVG from "../../components/LoaderSVG";
+import axios from "axios";
 
 export default {
   name: "LoginPage",
@@ -76,6 +66,8 @@ export default {
         'clientType': this.clientType
         // eslint-disable-next-line no-unused-vars
       }).then(resp => {
+        axios.defaults.headers.common['Authorization'] = resp.authToken;
+
         this.$router.push('/');
 
         this.$swal.fire({

@@ -1,8 +1,9 @@
 import { createWebHistory, createRouter } from 'vue-router';
-import LoginPage from "./Views/LoginPage";
+import LoginPage from "./Views/Auth/LoginPage";
 import AllCountries from "./Views/Country/AllCountries";
 import CreateCountry from "./Views/Country/CreateCountry";
-import RegisterPage from "./Views/RegisterPage";
+import RegisterPage from "./Views/Auth/RegisterPage";
+import UpdateAccount from "./Views/Auth/UpdateAccount";
 import store from './store';
 
 const routes = [
@@ -19,10 +20,21 @@ const routes = [
     meta: { guest: true },
   },
   {
+    path: '/update-account',
+    name: 'UpdateAccount',
+    component: UpdateAccount,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
     path: '/',
     name: 'AllCountries',
     component: AllCountries,
-    meta: {requiresAuth: true},
+    meta: {
+      requiresAuth: true,
+      permission: 'view_country'
+    },
     children: [
       {
         path: '/create',

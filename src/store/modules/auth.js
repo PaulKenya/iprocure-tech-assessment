@@ -3,6 +3,8 @@ import axios from "axios";
 export const auth = {
   state: () => ({
     user: null,
+    authToken: '',
+    permissions: [],
     errors: []
   }),
 
@@ -11,8 +13,9 @@ export const auth = {
       return new Promise((resolve, reject) => {
         axios.post('/auth/login', user)
           .then(resp => {
-            console.log('logged in successfully', resp.data.data.user);
+            commit('setAuthToken', `Bearer ${resp.data.data.token}`);
             commit('setUser', resp.data.data.user)
+            commit('setPermissions', resp.data.data.user.permissions);
             // set token
             resolve(resp)
           }).catch(err => {
@@ -55,19 +58,27 @@ export const auth = {
 
   mutations: {
     setUser(state, username){
-      state.user = username
+      state.user = username;
     },
     LogOut(state){
-      state.user = null
+      state.user = null;
     },
     setErrors(state, errors){
-      state.errors = errors
+      state.errors = errors;
+    },
+    setAuthToken(state, token){
+      state.authToken = token;
+    },
+    setPermissions(state, permissions){
+      state.permissions = permissions;
     }
   },
 
   getters: {
     isAuthenticated: state => !!state.user,
     loggedInUser: state => state.user,
-    errors: state => state.errors
+    errors: state => state.errors,
+    authToken: state => state.authToken,
+    permissions: state => state.permissions
   }
 }
