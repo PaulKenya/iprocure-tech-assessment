@@ -56,7 +56,18 @@
 <!--          <label for="remember" class="text-left ml-2 text-sm font-medium text-gray-900 dark:text-gray-400">I agree with the <a href="#" class="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a>.</label>-->
 <!--        </div>-->
         <ErrorToaster v-if="errors.length"/>
-        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          <LoaderSVG v-if="loading" class="inline w-7 h-7"/>
+          <span v-else>
+            Submit
+          </span>
+        </button>
+        <div class="text-sm font-medium text-gray-500 dark:text-gray-300 py-6">
+          Already have an account?
+          <router-link to="/login" class="text-blue-700 hover:underline dark:text-blue-500">
+            Login
+          </router-link>
+        </div>
       </form>
 
     </div>
@@ -66,10 +77,11 @@
 <script>
 import {mapActions, mapGetters} from "vuex";
 import ErrorToaster from "../components/ErrorToaster";
+import LoaderSVG from "../components/LoaderSVG";
 
 export default {
   name: "RegisterPage",
-  components: {ErrorToaster},
+  components: {LoaderSVG, ErrorToaster},
   data(){
     return {
       firstName: 'Jane',
@@ -81,6 +93,7 @@ export default {
       password: '123456',
       confirmPassword: '123456',
       username: 'codeninja',
+      loading: false
     }
   },
   computed: {
@@ -91,6 +104,8 @@ export default {
   methods: {
     ...mapActions(['Register']),
     submit(){
+      this.loading = true;
+
       this.Register({
         'firstName': this.firstName,
         'lastName': this.lastName,
@@ -110,11 +125,14 @@ export default {
           timer: 1500
         })
 
+        this.loading = false;
+
         // Redirect to login
         this.$router.push('/login');
 
         // eslint-disable-next-line no-unused-vars
       }).catch(err => {
+        this.loading = false;
       })
     }
   }

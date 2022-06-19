@@ -28,7 +28,12 @@
 <!--          <a href="#" class="ml-auto text-sm text-blue-700 hover:underline dark:text-blue-500">Lost Password?</a>-->
 <!--        </div>-->
         <ErrorToaster v-if="errors.length"/>
-        <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login to your account</button>
+        <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          <LoaderSVG v-if="loading" class="inline w-7 h-7"/>
+          <span v-else>
+            Login to your account
+          </span>
+        </button>
         <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
           Not registered?
           <router-link to="/register" class="text-blue-700 hover:underline dark:text-blue-500">
@@ -43,15 +48,17 @@
 <script>
 import {mapActions, mapGetters} from "vuex";
 import ErrorToaster from "../components/ErrorToaster";
+import LoaderSVG from "../components/LoaderSVG";
 
 export default {
   name: "LoginPage",
-  components: {ErrorToaster},
+  components: {LoaderSVG, ErrorToaster},
   data(){
     return {
       username: 'frogman',
       password: '123456',
-      clientType: 'web'
+      clientType: 'web',
+      loading: false
     }
   },
   computed: {
@@ -62,6 +69,7 @@ export default {
   methods: {
     ...mapActions(['LogIn']),
     submit(){
+      this.loading = true;
       this.LogIn({
         'username': this.username,
         'password': this.password,
@@ -77,8 +85,10 @@ export default {
           timer: 1500
         })
 
+        this.loading = false;
         // eslint-disable-next-line no-unused-vars
       }).catch(err => {
+        this.loading = false;
       })
     }
   }
