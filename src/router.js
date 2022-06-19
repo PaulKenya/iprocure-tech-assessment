@@ -37,10 +37,13 @@ const routes = [
     },
     children: [
       {
-        path: '/create',
+        path: '/edit',
         name: 'CountryForm',
         component: CreateCountry,
-        meta: {requiresAuth: true},
+        meta: {
+          requiresAuth: true,
+          permission: 'edit_country'
+        },
         props: (x) => ({
           action: x.params.action,
           verb: x.params.verb
