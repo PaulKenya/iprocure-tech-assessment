@@ -45,7 +45,7 @@ export default {
   components: {LoaderSVG, ErrorToaster},
   data(){
     return {
-      username: 'frogman',
+      username: 'wireman',
       password: '123456',
       clientType: 'web',
       loading: false
