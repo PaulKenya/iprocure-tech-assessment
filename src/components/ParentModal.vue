@@ -1,11 +1,8 @@
 <template>
   <!-- Main modal -->
-
   <div id="defaultModal" tabindex="-1" class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50
    w-full md:inset-0 h-modal md:h-full justify-center items-center flex" aria-modal="true" role="dialog">
-    <div
-        class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"
-    ></div>
+    <div class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"></div>
     <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
       <!-- Modal content -->
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -22,7 +19,7 @@
           </button>
         </div>
         <!-- Modal body -->
-        <div class="p-6 space-y-6">
+        <div class="p-5 space-y-6">
           <slot/>
         </div>
       </div>

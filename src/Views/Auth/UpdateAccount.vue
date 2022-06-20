@@ -1,15 +1,16 @@
 <template>
-  <ParentModal class="mt-5">
-    <RegistrationForm action="Update Account"/>
+  <ParentModal class="mt-5" action="Update Account">
+    <UpdateProfileForm/>
   </ParentModal>
 </template>
 
 <script>
 import ParentModal from "../../components/ParentModal";
-import RegistrationForm from "../../components/RegistrationForm";
+import UpdateProfileForm from "@/components/UpdateProfileForm";
+
 export default {
   name: "UpdateAccount",
-  components: {RegistrationForm, ParentModal}
+  components: {UpdateProfileForm, ParentModal}
 }
 </script>
 

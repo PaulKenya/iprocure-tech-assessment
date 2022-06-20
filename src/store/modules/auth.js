@@ -47,6 +47,24 @@ export const auth = {
       })
     },
 
+    updateProfile({commit}, user) {
+      return new Promise((resolve, reject) => {
+        axios.post('/auth/update-profile', user)
+            .then(resp => {
+              console.log('profile updated successfully', resp);
+              commit('setUser', resp.data)
+              resolve(resp)
+            }).catch(err => {
+          if (err.response?.data?.errors) {
+            commit('setErrors', err.response.data.errors)
+          } else {
+            commit('setErrors', {'message': 'An unknown error occurred'})
+          }
+          reject(err)
+        })
+      })
+    },
+
     clearErrors({commit}) {
       commit('setErrors', [])
     },

@@ -10,13 +10,13 @@
         <button type="button" class="flex mr-3 text-sm rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">
           <span class="sr-only">Open user menu</span>
           <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-          <span class="mx-2 my-auto">{{loggedInUser.username}}</span>
+          <span class="mx-2 my-auto">{{loggedInUser.firstName + ' ' + loggedInUser.lastName}}</span>
           <svg class="w-4 h-4 my-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
         </button>
 
         <div class="hidden z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="top" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(1015px, 939.5px, 0px);">
           <div class="py-3 px-4">
-            <span class="block text-sm text-gray-900 dark:text-white">{{ loggedInUser.firstName }} {{ loggedInUser.lastName }}</span>
+            <span class="block text-sm text-gray-900 dark:text-white">{{ loggedInUser.username }}</span>
             <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">{{ loggedInUser.email }}</span>
           </div>
           <ul class="py-1" aria-labelledby="dropdown">
